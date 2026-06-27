@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Tập Tương Tác - Ms Lê Hằng English</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8854C0;
+            --secondary: #FDCB6E;
+            --accent: #00C9A7;
+            --correct: #00D26A;
+            --wrong: #FF4757;
+            --text-color: #2D3436;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #8854C0, #FDCB6E, #00C9A7, #FF7675);
+            background-size: 400% 400%;
+            animation: gradientMove 15s ease infinite;
+            position: relative;
+            padding: 20px;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Cg fill='%23ffffff' fill-opacity='0.15'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43 7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm55-56c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM10 82c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm75 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zM47 80c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm21-48c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-3-17c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zm-32 3c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm-9 23c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z'/%3E%3C/g%3E%3C/svg%3E");
+            mix-blend-mode: overlay;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .teacher-title {
+            font-size: 1.1rem;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 6px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 700;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            border: 2px solid var(--primary);
+        }
+
+        .alert-box {
+            background: #FFF3CD;
+            border-left: 6px solid #FFC107;
+            padding: 15px;
+            margin: 15px auto;
+            border-radius: 12px;
+            max-width: 750px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: left;
+            position: relative;
+            z-index: 1;
+        }
+
+        .alert-box h4 {
+            color: #856404;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding-bottom: 100px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 24px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 4px solid #FFF;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover { transform: translateY(-2px); }
+
+        .question-header {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2D3436;
+            line-height: 1.6;
+        }
+
+        .dialogue-text {
+            background: #F1F2F6;
+            padding: 12px 18px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary);
+            font-style: italic;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .option-btn {
+            background: #FFFFFF;
+            border: 2px solid #E0E0E0;
+            border-bottom: 5px solid #E0E0E0;
+            border-radius: 16px;
+            padding: 12px 18px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            position: relative;
+            outline: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            transform: scale(1.01) translateY(-2px);
+            border-color: var(--primary);
+            border-bottom-width: 5px;
+        }
+
+        .option-btn:active:not(:disabled) {
+            transform: translateY(3px);
+            border-bottom-width: 2px;
+        }
+
+        .option-btn:disabled { cursor: not-allowed; }
+
+        .option-btn.correct {
+            background-color: #E6F9F0 !important;
+            border-color: var(--correct) !important;
+            border-bottom-color: #00A854 !important;
+            color: #006633 !important;
+        }
+
+        .option-btn.wrong {
+            background-color: #FFEBEB !important;
+            border-color: var(--wrong) !important;
+            border-bottom-color: #D63031 !important;
+            color: #A30000 !important;
+        }
+
+        .explanation-box {
+            margin-top: 20px;
+            background: #F8F9FA;
+            border-radius: 16px;
+            padding: 20px;
+            border-left: 6px solid var(--accent);
+            display: none;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .explanation-box h5 {
+            color: var(--primary);
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .exp-section {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .exp-title {
+            font-weight: 700;
+            color: #4b6584;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .shake { animation: shakeAnim 0.4s ease-in-out; }
+
+        @keyframes shakeAnim {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+
+        .submit-area { text-align: center; margin-top: 40px; }
+
+        .btn-submit-all {
+            background: #FF7675;
+            color: white;
+            border: none;
+            border-bottom: 6px solid #D63031;
+            padding: 16px 45px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+            transition: all 0.1s ease;
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .popup-overlay.active { opacity: 1; pointer-events: auto; }
+
+        .popup-content {
+            background: white;
+            border-radius: 30px;
+            padding: 35px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 6px solid var(--primary);
+        }
+
+        .popup-overlay.active .popup-content { transform: scale(1); }
+
+        .popup-score {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin: 15px 0;
+        }
+
+        .popup-comment {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #4b6584;
+        }
+
+        .popup-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-bottom: 5px solid #00A854;
+            padding: 12px 35px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="teacher-title">Giáo viên tạo: Ms Lê Hằng English</div>
+    </header>
+
+    <div class="alert-box">
+        <h4>⚠️ HƯỚNG DẪN ÔN TẬP ⚠️</h4>
+        <p>Đọc kỹ đề bài giao tiếp hoặc chuỗi hội thoại bên dưới, suy luận mối liên kết logic trước khi chọn đáp án để ghi điểm tuyệt đối con nhé!</p>
+    </div>
+
+    <div class="container" id="quiz-container"></div>
+
+    <div class="submit-area">
+        <button class="btn-submit-all" onclick="submitTotalExam()">NỘP BÀI TỔNG KẾT</button>
+    </div>
+
+    <div class="popup-overlay" id="result-popup">
+        <div class="popup-content">
+            <h2>🎉 KẾT QUẢ BÀI LÀM 🎉</h2>
+            <div class="popup-score" id="score-display">0/0</div>
+            <div class="popup-comment" id="comment-display">Đang tính điểm...</div>
+            <button class="popup-btn" onclick="closePopup()">Làm lại bài thi</button>
+        </div>
+    </div>
+
+    <script>
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playSound(type) {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain); gain.connect(audioCtx.destination);
+            if (type === 'correct') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+                osc.frequency.setValueAtTime(659.25, audioCtx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.3);
+            } else {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(180.00, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                osc.start(); osc.stop(audioCtx.currentTime + 0.3);
+            }
+        }
+
+        // DỮ LIỆU CẤU TRÚC EXERCISE 14 & EXERCISE 15
+        const questionsData = [
+            // --- EXERCISE 14 ---
+            {
+                id: 1401, heading: "Exercise 14 - Câu 1 (Giao tiếp)",
+                isDialogue: true,
+                dialogue: `Sue: "Hey, Ally! Have you heard about the upcoming neighborhood picnic?"<br>Ally: "_______. It's a great way to meet new people and strengthen our community bonds."`,
+                options: [
+                    {key:"A", text:"Of course not, it’s not costly."},
+                    {key:"B", text:"Yes! I'm excited."},
+                    {key:"C", text:"I think so."},
+                    {key:"D", text:"No problem."}
+                ],
+                correct: "B",
+                explanation: {
+                    step1: "Sue: 'Này Ally! Bạn đã nghe nói về buổi dã ngoại sắp tới của xóm mình chưa?' - Ally: '_______. Đó là một cách tuyệt vời để gặp gỡ mọi người và thắt chặt tình làng nghĩa xóm.'",
+                    step2: "A. Dĩ nhiên là không, nó không đắt | B. Vâng! Mình đang rất hào hứng | C. Mình nghĩ thế | D. Không vấn đề gì.",
+                    step3: "Vế sau của Ally giải thích lợi ích tích cực của buổi dã ngoại, phản ánh tâm trạng mong đợi và vui vẻ, do đó phản hồi 'Yes! I'm excited.' hoàn toàn trùng khớp logic.",
+                    step4: "Các phương án khác (A, C, D) không thể hiện sự tương đồng cảm xúc hoặc bị lệch chủ đề ngữ cảnh giao tiếp."
+                }
+            },
+            {
+                id: 1402, heading: "Exercise 14 - Câu 2 (Giao tiếp)",
+                isDialogue: true,
+                dialogue: `Thanh: "Tuan, did you know that the new bakery on Main Street is family-owned?"<br>Tuan: "_______. Supporting local businesses is essential."`,
+                options: [
+                    {key:"A", text:"Really? I'll have to check it out."},
+                    {key:"B", text:"Can I pay by credit card?"},
+                    {key:"C", text:"What do you have?"},
+                    {key:"D", text:"You’re welcome."}
+                ],
+                correct: "A",
+                explanation: {
+                    step1: "Thanh: 'Tuấn ơi, bạn có biết tiệm bánh mới trên Phố Chính là của một hộ gia đình tự doanh không?' - Tuấn: '_______. Việc ủng hộ các doanh nghiệp địa phương là rất cần thiết.'",
+                    step2: "A. Thật sao? Mình phải ghé qua xem mới được | B. Mình trả bằng thẻ tín dụng được không? | C. Bạn có cái gì thế? | D. Không có chi.",
+                    step3: "Tuấn bày tỏ sự ngạc nhiên một cách tích cực ('Really?') và đưa ra hành động tiếp nối thích hợp ('check it out') vì anh ấy coi trọng việc hỗ trợ kinh doanh nội địa.",
+                    step4: "B, C, D là các câu thoại rời rạc, thường dùng mua hàng hoặc đáp lại lời cảm ơn, hoàn toàn lạc đề."
+                }
+            },
+            {
+                id: 1403, heading: "Exercise 14 - Câu 3 (Giao tiếp)",
+                isDialogue: true,
+                dialogue: `Manh: "Tim, have you considered volunteering at the community center?"<br>Tim: "_______. Let's make a difference together!"`,
+                options: [
+                    {key:"A", text:"Oh, that’s a problem."},
+                    {key:"B", text:"I can’t agree with you more."},
+                    {key:"C", text:"I haven't, but it's a fantastic idea."},
+                    {key:"D", text:"You can make it."}
+                ],
+                correct: "C",
+                explanation: {
+                    step1: "Mạnh: 'Tim, bạn đã từng cân nhắc việc làm tình nguyện ở trung tâm cộng đồng chưa?' - Tim: '_______. Hãy cùng nhau tạo nên sự khác biệt nào!'",
+                    step2: "A. Ồ, đó là một vấn đề | B. Mình không thể đồng ý với bạn nhiều hơn được nữa (Đồng ý hoàn toàn) | C. Mình chưa, nhưng đó là một ý tưởng tuyệt vời | D. Bạn có thể làm được mà.",
+                    step3: "Mạnh hỏi 'have you considered...' (đã từng cân nhắc chưa) nên Tim phản hồi trực tiếp trạng thái của mình 'I haven't' (Mình chưa), kèm theo lời khen 'fantastic idea' để làm tiền đề cho câu rủ rê hành động phía sau.",
+                    step4: "Phương án B dùng để đồng ý với một nhận định/quan điểm chứ không dùng để trả lời trực tiếp cho câu hỏi gợi ý hành động nghiệm thể."
+                }
+            },
+            {
+                id: 1404, heading: "Exercise 14 - Câu 4 (Giao tiếp)",
+                isDialogue: true,
+                dialogue: `Sang: "Tung, there have been some break-ins lately. _______"<br>Tung: "Let's organize a neighborhood watch program and look out for each other."`,
+                options: [
+                    {key:"A", text:"My pleasure."},
+                    {key:"B", text:"The meal was out of this world."},
+                    {key:"C", text:"I’m afraid not."},
+                    {key:"D", text:"How can we improve security?"}
+                ],
+                correct: "D",
+                explanation: {
+                    step1: "Sáng: 'Tùng ơi, dạo gần đây xảy ra vài vụ trộm đột nhập đấy. _______' - Tùng: 'Hãy tổ chức chương trình dân phòng bảo vệ xóm làng và để mắt tới nhau nhé.'",
+                    step2: "A. Niềm vinh hạnh của tôi | B. Bữa ăn ngon tuyệt đỉnh | C. Tôi e là không | D. Chúng ta có thể cải thiện an ninh bằng cách nào đây?",
+                    step3: "Lời phản hồi của Tùng đưa ra giải pháp ('organize a neighborhood watch...'), nghĩa là câu trước đó của Sáng phải là một câu hỏi xin giải pháp hoặc ý kiến về an ninh ('improve security').",
+                    step4: "Các phương án A, B, C hoàn toàn không liên quan đến chủ đề vụ trộm và bảo đảm an ninh."
+                }
+            },
+            {
+                id: 1405, heading: "Exercise 14 - Câu 5 (Giao tiếp)",
+                isDialogue: true,
+                dialogue: `An: "Thai, I'd love to see more green spaces in our community."<br>Thai: "Agreed! _______"`,
+                options: [
+                    {key:"A", text:"Thank you."},
+                    {key:"B", text:"Yes, I was tired yesterday."},
+                    {key:"C", text:"You are welcome."},
+                    {key:"D", text:"Let's start a tree-planting campaign."}
+                ],
+                correct: "D",
+                explanation: {
+                    step1: "An: 'Thái à, mình rất muốn thấy nhiều không gian xanh hơn trong cộng đồng của chúng ta.' - Thái: 'Đồng ý! _______'",
+                    step2: "A. Cảm ơn bạn | B. Đúng vậy, hôm qua mình mệt | C. Không có chi | D. Chúng ta hãy phát động một chiến dịch trồng cây đi.'",
+                    step3: "Chiến dịch trồng cây ('tree-planting campaign') là hành động thực tế và trực tiếp nhất để hiện thực hóa ước muốn tăng không gian xanh ('green spaces') mà hai bạn đang thảo luận.",
+                    step4: "Các câu đối thoại còn lại mang sắc thái trả lời cảm ơn hoặc kể lể cá nhân sai ngữ cảnh."
+                }
+            },
+
+            // --- EXERCISE 15 ---
+            {
+                id: 1501, heading: "Exercise 15 - Câu 1 (Sắp xếp hội thoại)",
+                isDialogue: false,
+                question: `Sắp xếp các câu sau thành một đoạn hội thoại có nghĩa:<br>
+                <strong>a.</strong> Brian: Oh, really? I find pottery fascinating, it's such a precise skill.<br>
+                <strong>b.</strong> Ally: Me too! They made it look so easy, but I know it takes years of practice.<br>
+                <strong>c.</strong> Ally: I saw a pottery artisan at the market today. Their work was amazing!`,
+                options: [
+                    {key:"A", text:"a - b - c"},
+                    {key:"B", text:"c - a - b"},
+                    {key:"C", text:"b - c - a"},
+                    {key:"D", text:"a - c - b"}
+                ],
+                correct: "B",
+                explanation: {
+                    step1: "Dịch các câu thành phần: (a) Brian ngạc nhiên và nhận xét làm gốm là kỹ năng đòi hỏi sự chuẩn xác; (b) Ally đồng ý và bảo nhìn thì dễ nhưng mất nhiều năm luyện tập; (c) Ally kể hôm nay thấy một nghệ nhân làm gốm ở chợ.",
+                    step2: "Câu (c) mang tính chất mở đầu câu chuyện, giới thiệu sự kiện 'gặp nghệ nhân'. Câu (a) là phản hồi trực tiếp của Brian đối với thông tin của Ally. Câu (b) bắt đầu bằng 'Me too!' để phụ họa cho quan điểm của Brian.",
+                    step3: "Mạch suy luận logic chặt chẽ bắt buộc phải tuân theo thứ tự: c (khơi mào) -> a (phản hồi) -> b (đồng thuận sâu). Do đó chọn B.",
+                    step4: "Các phương án khác sắp xếp ngược ngạo khiến các từ nối liên kết như 'Oh, really?' hay 'Me too!' bị đặt sai chỗ."
+                }
+            },
+            {
+                id: 1502, heading: "Exercise 15 - Câu 2 (Sắp xếp hội thoại)",
+                isDialogue: false,
+                question: `Sắp xếp các câu sau thành một đoạn hội thoại có nghĩa:<br>
+                <strong>a.</strong> Brian: Me too! Everyone seems to know each other and always offers help.<br>
+                <strong>b.</strong> Ally: It really makes this place feel like home.<br>
+                <strong>c.</strong> Ally: I love how friendly our local community is.`,
+                options: [
+                    {key:"A", text:"a - b - c"},
+                    {key:"B", text:"b - c - a"},
+                    {key:"C", text:"c - a - b"},
+                    {key:"D", text:"c - b - a"}
+                ],
+                correct: "C",
+                explanation: {
+                    step1: "Dịch các câu thành phần: (a) Brian đồng tình và chỉ ra mọi người đều quen biết và giúp đỡ nhau; (b) Ally chốt hạ việc này làm nơi đây giống như nhà; (c) Ally khen ngợi sự thân thiện của cộng đồng địa phương.",
+                    step2: "Câu (c) đưa ra chủ đề tổng quát (sự thân thiện). Câu (a) dùng 'Me too!' tiếp nối ngay lập tức để Brian chia sẻ cùng cảm xúc. Câu (b) là câu kết luận đánh giá giá trị cảm xúc cuối cùng.",
+                    step3: "Trình tự liên kết chuẩn văn phong bản xứ là c -> a -> b. Chọn C.",
+                    step4: "Nếu đưa b hoặc a lên đầu, cuộc trò chuyện không có câu chủ đề và đại từ 'It' ở câu b không có danh từ thay thế."
+                }
+            },
+            {
+                id: 1503, heading: "Exercise 15 - Câu 3 (Sắp xếp hội thoại)",
+                isDialogue: false,
+                question: `Sắp xếp các câu sau thành một đoạn hội thoại có nghĩa:<br>
+                <strong>a.</strong> Brian: It's a nice change from looking at screens all day. Do you ever do any hand-crafts?<br>
+                <strong>b.</strong> Ally: Not really, but you're making me want to try! Maybe I'll start with something simple like friendship bracelets.<br>
+                <strong>c.</strong> Ally: Hey Brian, what are you working on? It looks interesting.<br>
+                <strong>d.</strong> Ally: That's cool! I've always admired people who can create things with their hands.<br>
+                <strong>e.</strong> Brian: Hi Ally! I'm trying to knit a scarf. I'm still learning, but it's quite relaxing.`,
+                options: [
+                    {key:"A", text:"c - e - d - a - b"},
+                    {key:"B", text:"c - d - e - a - b"},
+                    {key:"C", text:"e - c - d - a - b"},
+                    {key:"D", text:"c - e - a - d - b"}
+                ],
+                correct: "A",
+                explanation: {
+                    step1: "Phân tích chuỗi hành động: (c) Ally bắt chuyện bằng câu hỏi Brian đang làm gì. (e) Brian đáp lời và bảo đang đan khăn len. (d) Ally khen ngợi tài làm đồ thủ công. (a) Brian giải thích lợi ích và hỏi ngược lại Ally có làm đồ thủ công không. (b) Ally trả lời câu hỏi của Brian.",
+                    step2: "Cặp câu hỏi - trả lời 1: c mở đầu hỏi -> e đáp. Cặp phản hồi - hỏi ngược 2: d khen -> a giải thích và hỏi lại -> b trả lời chốt hội thoại.",
+                    step3: "Ghép nối các mắt xích logic lại, ta có chuỗi chuẩn xác là c - e - d - a - b. Trùng khớp với đáp án A.",
+                    step4: "Các phương án nhiễu khác đặt câu trả lời trước câu hỏi hoặc làm đứt mạch tương tác hỏi - đáp giữa hai nhân vật."
+                }
+            }
+        ];
+
+        // --- BỘ MÁY ĐIỀU HƯỚNG HIỂN THỊ ---
+        const container = document.getElementById('quiz-container');
+        let userAnswers = {};
+
+        function renderQuiz() {
+            container.innerHTML = "";
+            questionsData.forEach((q, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.id = `card-${q.id}`;
+
+                let headerHtml = `<div class="question-header"><strong>Câu ${index + 1}:</strong> [${q.heading}]</div>`;
+                if (q.isDialogue) {
+                    headerHtml += `<div class="dialogue-text">${q.dialogue}</div>`;
+                } else {
+                    headerHtml += `<div style="margin-bottom:15px; line-height:1.6;">${q.question}</div>`;
+                }
+                card.innerHTML = headerHtml;
+
+                const optionsGrid = document.createElement('div');
+                optionsGrid.className = 'options-grid';
+                
+                q.options.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.innerHTML = `<strong>${opt.key}.</strong> &nbsp;${opt.text}`;
+                    btn.onclick = () => checkAnswer(btn, q.id, opt.key, q.correct);
+                    optionsGrid.appendChild(btn);
+                });
+                
+                card.appendChild(optionsGrid);
+
+                const expBox = document.createElement('div');
+                expBox.className = 'explanation-box';
+                expBox.id = `exp-${q.id}`;
+                expBox.innerHTML = `
+                    <h5>💡 Giải Thích Sư Phạm Chi Tiết:</h5>
+                    <div class="exp-section"><span class="exp-title">1. Ngữ cảnh & Dịch nghĩa câu:</span><br>${q.explanation.step1}</div>
+                    <div class="exp-section"><span class="exp-title">2. Phân tích ngữ liệu liên kết:</span><br>${q.explanation.step2}</div>
+                    <div class="exp-section"><span class="exp-title">3. Vì sao đáp án này đúng?</span><br>${q.explanation.step3}</div>
+                    <div class="exp-section"><span class="exp-title">4. Vì sao các phương án khác sai?</span><br>${q.explanation.step4}</div>
+                `;
+                card.appendChild(expBox);
+                container.appendChild(card);
+            });
+        }
+
+        function checkAnswer(clickedBtn, qId, selectedKey, correctKey) {
+            const card = document.getElementById(`card-${qId}`);
+            const buttons = card.querySelectorAll('.option-btn');
+            buttons.forEach(btn => btn.disabled = true);
+
+            if (selectedKey === correctKey) {
+                clickedBtn.classList.add('correct');
+                playSound('correct');
+                userAnswers[qId] = true;
+            } else {
+                clickedBtn.classList.add('wrong');
+                buttons.forEach(btn => {
+                    if (btn.innerHTML.includes(`<strong>${correctKey}.</strong>`)) {
+                        btn.classList.add('correct');
+                    }
+                });
+                card.classList.add('shake');
+                playSound('wrong');
+                userAnswers[qId] = false;
+            }
+            document.getElementById(`exp-${qId}`).style.display = 'block';
+        }
+
+        function submitTotalExam() {
+            let correctCount = 0;
+            const totalQuestions = questionsData.length;
+            
+            for (let key in userAnswers) {
+                if (userAnswers[key] === true) correctCount++;
+            }
+            
+            const percentage = (correctCount / totalQuestions) * 100;
+            document.getElementById('score-display').innerText = `${correctCount}/${totalQuestions}`;
+
+            let comment = "";
+            if (percentage < 60) {
+                comment = "Con cần chú ý hơn vào các từ nối liên kết câu bài giao tiếp nhé! Đọc kỹ giải thích nha.";
+            } else if (percentage >= 60 && percentage < 90) {
+                comment = "Làm tốt lắm con! Tư duy logic hội thoại rất nhạy bén, cố gắng sửa các câu sót nha.";
+            } else {
+                comment = "Tuyệt vời ông mặt trời! Đạt điểm tuyệt đối rồi, con học phần giao tiếp này rất vững vàng!";
+            }
+
+            document.getElementById('comment-display').innerText = `Lời khuyên từ cô Hằng: "${comment}"`;
+            document.getElementById('result-popup').classList.add('active');
+        }
+
+        function closePopup() {
+            document.getElementById('result-popup').classList.remove('active');
+            userAnswers = {};
+            renderQuiz();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        renderQuiz();
+    </script>
+</body>
+</html>
